@@ -11,11 +11,12 @@ public class Panel extends JPanel implements Runnable {
     // SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3; // Vamos multiplicar 3x16
+
     public final int tileSize = originalTileSize * scale; // 48x48
-    public int maxScreenCol = 18;
-    public int maxScreenRow = 14;
-    final int screenWidth = tileSize * maxScreenCol; // 864 pixels
-    final int screenHeight = tileSize * maxScreenRow; // 672 pixels
+    public final int maxScreenCol = 18;
+    public final int maxScreenRow = 14;
+    public final int screenWidth = tileSize * maxScreenCol; // 864 pixels
+    public final int screenHeight = tileSize * maxScreenRow; // 672 pixels
 
     // FPS
     int FPS = 60;
