@@ -13,10 +13,16 @@ public class Player extends Entity {
     Panel gp;
     KeyBoard keyB;
 
+    public final int screenX;
+    public final int screenY;
+
     public Player(Panel gp, KeyBoard keyB) {
 
         this.gp = gp;
         this.keyB = keyB;
+
+        screenX = gp.screenWidth/2 - (gp.tileSize/2);
+        screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
         setDefautValues();
         getPlayerImage();
@@ -24,8 +30,8 @@ public class Player extends Entity {
     public void setDefautValues(){
 
         //Set player defaut position
-        x = 100;
-        y = 100;
+        worldX= gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         speed = 4;
         directon = "down";
     }
@@ -52,16 +58,16 @@ public class Player extends Entity {
         if (keyB.upPressed || keyB.downPressed || keyB.leftPressed || keyB.rightPressed) {
             if (keyB.upPressed) {
                 directon = "up";
-                y -= speed;
+                worldY -= speed;
             } else if (keyB.downPressed) {
                 directon = "down";
-                y += speed;
+                worldY += speed;
             } else if (keyB.leftPressed) {
                 directon = "left";
-                x -= speed;
+                worldX -= speed;
             } else if (keyB.rightPressed) {
                 directon = "right";
-                x += speed;
+                worldX += speed;
             }
 
             spriteCounter++;
@@ -89,7 +95,7 @@ public class Player extends Entity {
                 image = (spriteNum == 1) ? right1 : right2;
                 break;
         }
-        g2d.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2d.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 
 }

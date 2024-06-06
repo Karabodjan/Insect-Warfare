@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 //This class stores variables that will be used in player,NPC,Insects
 public class Entity {
 
-    public int x, y;
+    public int worldX, worldY;
     public int speed;
 
     //BufferedImage describes an Image with an acessible buffer of image data
