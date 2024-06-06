@@ -1,0 +1,95 @@
+package entity;
+
+import main.KeyBoard;
+import main.Panel;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+public class Player extends Entity {
+
+    Panel gp;
+    KeyBoard keyB;
+
+    public Player(Panel gp, KeyBoard keyB) {
+
+        this.gp = gp;
+        this.keyB = keyB;
+
+        setDefautValues();
+        getPlayerImage();
+    }
+    public void setDefautValues(){
+
+        //Set player defaut position
+        x = 100;
+        y = 100;
+        speed = 4;
+        directon = "down";
+    }
+    //Load the images
+    public void getPlayerImage(){
+
+        try {
+            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+    public void update() {
+        if (keyB.upPressed || keyB.downPressed || keyB.leftPressed || keyB.rightPressed) {
+            if (keyB.upPressed) {
+                directon = "up";
+                y -= speed;
+            } else if (keyB.downPressed) {
+                directon = "down";
+                y += speed;
+            } else if (keyB.leftPressed) {
+                directon = "left";
+                x -= speed;
+            } else if (keyB.rightPressed) {
+                directon = "right";
+                x += speed;
+            }
+
+            spriteCounter++;
+            if (spriteCounter > 12) {
+                spriteNum = (spriteNum == 1) ? 2 : 1;
+                spriteCounter = 0;
+            }
+        }
+    }
+
+    public void draw(Graphics2D g2d) {
+        BufferedImage image = null;
+
+        switch (directon) {
+            case "up":
+                image = (spriteNum == 1) ? up1 : up2;
+                break;
+            case "down":
+                image = (spriteNum == 1) ? down1 : down2;
+                break;
+            case "left":
+                image = (spriteNum == 1) ? left1 : left2;
+                break;
+            case "right":
+                image = (spriteNum == 1) ? right1 : right2;
+                break;
+        }
+        g2d.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+    }
+
+}
