@@ -1,7 +1,7 @@
-package main;
+package fr.celso.insectwarfare.main;
 
-import entity.Player;
-import tile.TileManager;
+import fr.celso.insectwarfare.entity.Player;
+import fr.celso.insectwarfare.tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.awt.*;
 public class Panel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS
-    final int originalTileSize = 16; // 16x16 tile
+    final int originalTileSize = 16; // 16x16 fr.celso.insectwarfare.tile
     final int scale = 3; // Vamos multiplicar 3x16
 
     public final int tileSize = originalTileSize * scale; // 48x48

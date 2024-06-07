@@ -1,7 +1,7 @@
-package entity;
+package fr.celso.insectwarfare.entity;
 
-import main.KeyBoard;
-import main.Panel;
+import fr.celso.insectwarfare.main.KeyBoard;
+import fr.celso.insectwarfare.main.Panel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

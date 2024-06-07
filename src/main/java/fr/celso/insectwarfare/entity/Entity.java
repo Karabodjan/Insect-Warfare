@@ -1,4 +1,4 @@
-package entity;
+package fr.celso.insectwarfare.entity;
 
 import java.awt.image.BufferedImage;
 

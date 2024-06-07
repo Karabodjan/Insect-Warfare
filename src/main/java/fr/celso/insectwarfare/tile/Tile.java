@@ -1,4 +1,4 @@
-package tile;
+package fr.celso.insectwarfare.tile;
 
 import java.awt.image.BufferedImage;
 

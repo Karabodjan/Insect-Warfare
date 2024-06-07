@@ -1,6 +1,6 @@
-package tile;
+package fr.celso.insectwarfare.tile;
 
-import main.Panel;
+import fr.celso.insectwarfare.main.Panel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
