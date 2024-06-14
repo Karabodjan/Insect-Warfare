@@ -30,8 +30,8 @@ public class Player extends Entity {
     public void setDefautValues(){
 
         //Set player defaut position
-        worldX= gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX= gp.tileSize * 39;
+        worldY = gp.tileSize * 39;
         speed = 4;
         directon = "down";
     }
