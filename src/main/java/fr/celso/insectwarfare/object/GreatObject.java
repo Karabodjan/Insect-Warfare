@@ -10,6 +10,9 @@ public class GreatObject {
     public String name;
     public Boolean colision = false;
     public int worldX, worldY;
+    public Rectangle solidArea = new Rectangle(0,0,48,48);
+    public int solidAreaDefaultX = 0;
+    public int solidAreaDefaultY = 0;
 
     public void draw(Graphics g2d,fr.celso.insectwarfare.main.Panel gp) {
 
