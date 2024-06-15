@@ -1,6 +1,7 @@
 package fr.celso.insectwarfare.main;
 
 import fr.celso.insectwarfare.entity.Player;
+import fr.celso.insectwarfare.object.GreatObject;
 import fr.celso.insectwarfare.tile.TileManager;
 
 import javax.swing.*;
@@ -30,7 +31,9 @@ public class Panel extends JPanel implements Runnable {
     KeyBoard keyB = new KeyBoard();
     Thread gameThread; // Para adicionarmos tempo real no jogo
     public ColisionCheck cCheck = new ColisionCheck(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyB);
+    public GreatObject obj [] =  new GreatObject[10];// I Can display up to 10 object in the same time
 
     public Panel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -39,6 +42,11 @@ public class Panel extends JPanel implements Runnable {
         this.addKeyListener(keyB);
         this.setFocusable(true); // o painel pode ser focado para receber entrada de teclado
         this.requestFocusInWindow(); // Garante que o painel tenha o foco para receber eventos de teclado
+    }
+
+    public void  setupGame(){
+
+        aSetter.setObject(); // This method is to add other setup
     }
 
     public void startGameThread() {
@@ -86,7 +94,18 @@ public class Panel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g; // melhor controle geométrico
+
+        //Tile
         tileM.draw(g2d);//tem que estar em cima desenhamos o terreno depois o jogapdr
+
+        //Object
+        for (int i = 0; i < obj.length; i++) {
+            if (obj[i] != null) {
+                obj [i].draw(g2d,this);
+            }
+        }
+
+        //Player
         player.draw(g2d);
         g2d.dispose(); // boa prática para salvar memória
     }

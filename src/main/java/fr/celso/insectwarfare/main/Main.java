@@ -17,6 +17,7 @@ public class Main {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+        panel.setupGame(); // called antes de iniciar o jogo
         panel.startGameThread(); // Iniciar o loop do jog
     }
 }
