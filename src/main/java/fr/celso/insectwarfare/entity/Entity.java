@@ -1,5 +1,6 @@
 package fr.celso.insectwarfare.entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 //This class stores variables that will be used in player,NPC,Insects
@@ -15,4 +16,7 @@ public class Entity {
     //Walk animation
     public int spriteCounter = 0;
     public int spriteNum= 1;
+
+    public Rectangle solidArea;
+    public boolean colisionOn = false;
 }

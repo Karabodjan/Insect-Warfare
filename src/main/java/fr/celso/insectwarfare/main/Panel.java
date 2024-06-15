@@ -29,6 +29,7 @@ public class Panel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
     KeyBoard keyB = new KeyBoard();
     Thread gameThread; // Para adicionarmos tempo real no jogo
+    public ColisionCheck cCheck = new ColisionCheck(this);
     public Player player = new Player(this, keyB);
 
     public Panel() {
