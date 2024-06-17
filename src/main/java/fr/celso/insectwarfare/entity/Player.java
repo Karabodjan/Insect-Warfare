@@ -15,6 +15,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    int hasKey = 0;
 
     public Player(Panel gp, KeyBoard keyB) {
 
@@ -47,14 +48,14 @@ public class Player extends Entity {
     public void getPlayerImage(){
 
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/player/player_up1.png.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/player/player_up2.png.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/player/player_down1.png.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/player/player_down2.png.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/player/player_left2.png.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/player/player_left1.png.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/player/player_right2.png.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/player/player_right1.png.png"));
 
 
         }catch (IOException e){
@@ -82,6 +83,11 @@ public class Player extends Entity {
             colisionOn = false;
             gp.cCheck.checkTile(this);
 
+            // CHECK OBJECT COLISION
+           int objIndex = gp.cCheck.checkObject(this, true);
+            pickUpObject(objIndex);
+
+
             // IF COLISION = false, PLAYER CAN'T MOVE
             if (colisionOn == false) {
 
@@ -107,6 +113,29 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+    }
+    public void pickUpObject(int i){
+
+        if (i != 999) {
+
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+                case "Key":
+                    hasKey++;
+                    gp.obj[i] = null;
+                    break;
+                case "Door":
+                    if (hasKey > 0) {
+                        gp.obj[i] = null;
+                        hasKey--;
+                    }
+                    break;
+
+            }
+
+        }
+
     }
 
     public void draw(Graphics2D g2d) {
