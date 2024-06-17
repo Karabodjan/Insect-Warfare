@@ -29,7 +29,8 @@ public class Panel extends JPanel implements Runnable {
     //SYSTEM
     TileManager tileM = new TileManager(this);
     KeyBoard keyB = new KeyBoard();
-    Sound sound = new Sound();
+    Sound music = new Sound();
+    Sound se = new Sound();
     public ColisionCheck cCheck = new ColisionCheck(this);
     public AssetSetter aSetter = new AssetSetter(this);
     Thread gameThread; // Para adicionarmos tempo real no jogo
@@ -116,16 +117,16 @@ public class Panel extends JPanel implements Runnable {
     }
     public void playMusic(int i) {
 
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
 
     }
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
     public void playSE(int i) {
-        sound.setFile(i);
-        sound.play();
+        se.setFile(i);
+        se.play();
     }
 }
