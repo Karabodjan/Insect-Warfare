@@ -22,16 +22,19 @@ public class Panel extends JPanel implements Runnable {
     // WORLD SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
 
     // FPS
     int FPS = 60;
+
+    //SYSTEM
     TileManager tileM = new TileManager(this);
     KeyBoard keyB = new KeyBoard();
-    Thread gameThread; // Para adicionarmos tempo real no jogo
+    Sound sound = new Sound();
     public ColisionCheck cCheck = new ColisionCheck(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    Thread gameThread; // Para adicionarmos tempo real no jogo
+
+    // ENTITY AND OBJECT
     public Player player = new Player(this, keyB);
     public GreatObject obj [] =  new GreatObject[10];// I Can display up to 10 object in the same time
 
@@ -47,6 +50,8 @@ public class Panel extends JPanel implements Runnable {
     public void  setupGame(){
 
         aSetter.setObject(); // This method is to add other setup
+
+        playMusic(0);
     }
 
     public void startGameThread() {
@@ -108,5 +113,19 @@ public class Panel extends JPanel implements Runnable {
         //Player
         player.draw(g2d);
         g2d.dispose(); // boa prática para salvar memória
+    }
+    public void playMusic(int i) {
+
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+
+    }
+    public void stopMusic() {
+        sound.stop();
+    }
+    public void playSE(int i) {
+        sound.setFile(i);
+        sound.play();
     }
 }
