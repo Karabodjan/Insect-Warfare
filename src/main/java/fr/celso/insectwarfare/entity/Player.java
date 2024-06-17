@@ -125,12 +125,17 @@ public class Player extends Entity {
                     gp.playSE(1);
                     hasKey++;
                     gp.obj[i] = null;
+                    gp.ui.showMessage("you picked up the key");
                     break;
                 case "Door":
                     if (hasKey > 0) {
                         gp.playSE(2);
                         gp.obj[i] = null;
                         hasKey--;
+                        gp.ui.showMessage("You opened the door!");
+                    }
+                    else {
+                        gp.ui.showMessage("Go find the key!");
                     }
                     break;
 
