@@ -15,7 +15,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    int hasKey = 0;
+    public int hasKey = 0;
 
     public Player(Panel gp, KeyBoard keyB) {
 
@@ -122,11 +122,13 @@ public class Player extends Entity {
 
             switch (objectName) {
                 case "Key":
+                    gp.playSE(1);
                     hasKey++;
                     gp.obj[i] = null;
                     break;
                 case "Door":
                     if (hasKey > 0) {
+                        gp.playSE(2);
                         gp.obj[i] = null;
                         hasKey--;
                     }

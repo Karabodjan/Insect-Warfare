@@ -13,6 +13,8 @@ public class Sound {
     public Sound() {
 
         soundURL[0] = getClass().getResource("/sound/Dungeon.wav");
+        soundURL[1] = getClass().getResource("/sound/coin.wav");
+        soundURL[2] = getClass().getResource("/sound/unlock.wav");
     }
 //fORMAT TO OPEN AUDIO FILE IN jAVA
     public void  setFile (int i ){

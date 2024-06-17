@@ -33,6 +33,7 @@ public class Panel extends JPanel implements Runnable {
     Sound se = new Sound();
     public ColisionCheck cCheck = new ColisionCheck(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI (this);
     Thread gameThread; // Para adicionarmos tempo real no jogo
 
     // ENTITY AND OBJECT
@@ -111,10 +112,15 @@ public class Panel extends JPanel implements Runnable {
             }
         }
 
+        //UI
+        ui.draw(g2d);
+
         //Player
         player.draw(g2d);
         g2d.dispose(); // boa prática para salvar memória
     }
+
+
     public void playMusic(int i) {
 
         music.setFile(i);
