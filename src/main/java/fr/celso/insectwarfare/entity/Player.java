@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class Player extends Entity {
 
-    Panel gp;
     KeyBoard keyB;
 
     public final int screenX;
@@ -19,7 +18,8 @@ public class Player extends Entity {
 
     public Player(Panel gp, KeyBoard keyB) {
 
-        this.gp = gp;
+        super(gp);
+
         this.keyB = keyB;
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -40,7 +40,7 @@ public class Player extends Entity {
 
         //Set player defaut position
         worldX= gp.tileSize * 39;
-        worldY = gp.tileSize * 38;
+        worldY = gp.tileSize * 39;
         speed = 4;
         directon = "down";
     }

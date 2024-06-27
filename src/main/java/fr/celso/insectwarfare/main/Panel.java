@@ -1,5 +1,6 @@
 package fr.celso.insectwarfare.main;
 
+import fr.celso.insectwarfare.entity.Entity;
 import fr.celso.insectwarfare.entity.Player;
 import fr.celso.insectwarfare.object.GreatObject;
 import fr.celso.insectwarfare.tile.TileManager;
@@ -39,6 +40,7 @@ public class Panel extends JPanel implements Runnable {
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyB);
     public GreatObject obj [] =  new GreatObject[10];// I Can display up to 10 object in the same time
+    public Entity npc [] = new Entity[10];
 
 
     //GAME STATE
@@ -59,6 +61,7 @@ public class Panel extends JPanel implements Runnable {
     public void  setupGame(){
 
         aSetter.setObject(); // This method is to add other setup
+        aSetter.setNPC();
 
         playMusic(0);
         gameState = playState;
@@ -134,11 +137,20 @@ public class Panel extends JPanel implements Runnable {
             }
         }
 
-        //UI
-        ui.draw(g2d);
+        //NPC
+        for (int i = 0; i < npc.length; i++) {
+            if (npc[i] != null) {
+                npc[i].draw(g2d);
+            }
+        }
 
         //Player
         player.draw(g2d);
+
+        //UI
+        ui.draw(g2d);
+
+
         g2d.dispose(); // boa prática para salvar memória
     }
 
