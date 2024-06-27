@@ -9,12 +9,13 @@ import java.awt.image.BufferedImage;
 public class UI {
 
     Panel gp;
-    Graphics g2d;
+    Graphics2D g2d;
     Font arial_40;
     BufferedImage keyImage;
     public boolean messageON = false;
     public String message = "";
     int messageCounter = 0;
+    public String currentDialogue = "";
 
 
     public UI(Panel gp) {
@@ -50,14 +51,19 @@ public class UI {
                 messageON = false;
             }
         }
-
+        // PLAY STATE
         if (gp.gameState == gp.playState) {
 
         }
+        // PAUSE STATE
         if (gp.gameState == gp.pauseState) {
             drawPauseScreen();
         }
 
+        //Dialogue State
+        if (gp.gameState == gp.dialogueState) {
+            drawDialogueScreen();
+        }
     }
     public void drawPauseScreen() {
 
@@ -68,6 +74,36 @@ public class UI {
         int y = gp.screenHeight/2;
 
         g2d.drawString(text, x,y);
+
+    }
+    public void drawDialogueScreen() {
+
+        //WINDOW
+        int x = gp.tileSize*2;
+        int y = gp.tileSize/2;
+        int width = gp.screenWidth - (gp.tileSize*4);
+        int height = gp.tileSize*4;
+        drawSubWindow(x, y, width, height);
+
+        g2d.setFont(g2d.getFont().deriveFont(Font.PLAIN, 32f));
+        x += gp.tileSize;
+        y += gp.tileSize;
+
+        for (String line : currentDialogue.split("\n") ){
+            g2d.drawString(line, x, y);
+            y += 40;
+        }
+
+    }
+    public void drawSubWindow(int x, int y, int width, int height) {
+        Color c = new Color(0, 0, 0,210);
+        g2d.setColor(c);
+        g2d.fillRoundRect(x, y, width, height, 35, 35);
+
+        c = new Color(255, 255, 255);
+        g2d.setColor(c);
+        g2d.setStroke(new BasicStroke(5));
+        g2d.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
 
     }
     public int  getXforCenteredText(String text) {

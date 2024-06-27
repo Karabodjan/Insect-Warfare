@@ -64,7 +64,7 @@ public class Player extends Entity {
 
     }
     public void update() {
-        if (keyB.upPressed || keyB.downPressed || keyB.leftPressed || keyB.rightPressed) {
+        if (keyB.upPressed || keyB.downPressed || keyB.leftPressed || keyB.rightPressed || keyB.enterPressed) {
             if (keyB.upPressed) {
                 directon = "up";
 
@@ -93,7 +93,7 @@ public class Player extends Entity {
 
 
             // IF COLISION = false, PLAYER CAN'T MOVE
-            if (colisionOn == false) {
+            if (colisionOn == false && keyB.enterPressed == false) {
 
                 switch (directon) {
                     case "up":
@@ -149,8 +149,15 @@ public class Player extends Entity {
 
     }
 
-    public void interactNPC(int i){
-        if (i != 999) {}
+    public void interactNPC(int i) {
+        if (i != 999) {
+
+            if (gp.keyB.enterPressed == true) {
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
+            }
+        }
+        gp.keyB.enterPressed = false;
     }
 
     public void draw(Graphics2D g2d) {

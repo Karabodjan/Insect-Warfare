@@ -23,11 +23,36 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean colisionOn = false;
     public int actionLockCounter = 0;
+    String dialogues[] = new String[20];
+    int dialogueIndex = 0;
 
     public Entity(Panel gp) {
         this.gp = gp;
     }
     public void setAction(){}
+    public void speak(){
+
+        if(dialogues[dialogueIndex] == null){
+            dialogueIndex = 4;
+        }
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch(gp.player.directon) {
+            case "up":
+                directon = "down";
+                break;
+            case "down":
+                directon = "up";
+                break;
+            case "left":
+                directon = "right";
+                break;
+            case "right":
+                directon = "left";
+
+        }
+    }
     public void update(){
 
         setAction();

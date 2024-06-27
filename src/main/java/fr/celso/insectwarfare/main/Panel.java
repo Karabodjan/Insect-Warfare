@@ -29,7 +29,7 @@ public class Panel extends JPanel implements Runnable {
 
     //SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyBoard keyB = new KeyBoard(this);
+    public KeyBoard keyB = new KeyBoard(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public ColisionCheck cCheck = new ColisionCheck(this);
@@ -47,6 +47,7 @@ public class Panel extends JPanel implements Runnable {
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int dialogueState = 3;
     public final int  titleState = 0;
 
     public Panel() {

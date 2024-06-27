@@ -14,6 +14,7 @@ public class NPC_Master extends Entity {
         directon = "right";
         speed = 1;
         getImage();
+        setDialoque();
     }
 
     public void getImage() {
@@ -34,6 +35,15 @@ public class NPC_Master extends Entity {
         }
     }
 
+    public void setDialoque(){
+
+        dialogues[0] = "Hello, Boy!";
+        dialogues[1] = "The day has finally come...";
+        dialogues[2] = "You must defeat the evil that /nhas haunted this island for decades";
+        dialogues[3] = "Yes, your brother!";
+        dialogues[4] = "Find the key and enter the castle /nfor the final showdown";
+        dialogues[5] = "Good luck, Boy!";
+    }
     public void setAction() {
 
         actionLockCounter ++;
@@ -60,5 +70,10 @@ public class NPC_Master extends Entity {
 
             }
         }
+
+        public void speak(){
+
+        super.speak();
+    }
 }
 
