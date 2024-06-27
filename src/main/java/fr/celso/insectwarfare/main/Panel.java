@@ -28,7 +28,7 @@ public class Panel extends JPanel implements Runnable {
 
     //SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyBoard keyB = new KeyBoard();
+    KeyBoard keyB = new KeyBoard(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public ColisionCheck cCheck = new ColisionCheck(this);
@@ -39,6 +39,13 @@ public class Panel extends JPanel implements Runnable {
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyB);
     public GreatObject obj [] =  new GreatObject[10];// I Can display up to 10 object in the same time
+
+
+    //GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+    public final int  titleState = 0;
 
     public Panel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -54,6 +61,7 @@ public class Panel extends JPanel implements Runnable {
         aSetter.setObject(); // This method is to add other setup
 
         playMusic(0);
+        gameState = playState;
     }
 
     public void startGameThread() {
@@ -94,13 +102,27 @@ public class Panel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+
+        if(gameState == playState){
+            player.update();
+        }
+        if (gameState == pauseState) {
+
+        }
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g; // melhor controle geométrico
+
+        //Title Screen
+        if (gameState == titleState) {
+
+        }
+        //Others
+
+
 
         //Tile
         tileM.draw(g2d);//tem que estar em cima desenhamos o terreno depois o jogapdr
