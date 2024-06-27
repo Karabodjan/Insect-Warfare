@@ -4,6 +4,7 @@ import fr.celso.insectwarfare.main.Panel;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.util.Random;
 
 public class NPC_Master extends Entity {
 
@@ -33,4 +34,31 @@ public class NPC_Master extends Entity {
         }
     }
 
+    public void setAction() {
+
+        actionLockCounter ++;
+
+        if (actionLockCounter == 60) {
+
+            Random random = new Random();
+            int i = random.nextInt(100)+1; // pick up a number  form 1 to 100
+
+            if (i <= 25) {
+                directon = "up";
+            }
+            if (i > 25 && i <= 50) {
+                directon = "down";
+            }
+            if (i > 50 && i <= 75) {
+                directon = "left";
+            }
+            if (i > 75 && i <= 100) {
+                directon = "right";
+            }
+
+            actionLockCounter = 0;
+
+            }
+        }
 }
+

@@ -22,11 +22,43 @@ public class Entity {
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean colisionOn = false;
+    public int actionLockCounter = 0;
 
     public Entity(Panel gp) {
         this.gp = gp;
     }
+    public void setAction(){}
+    public void update(){
 
+        setAction();
+
+        colisionOn = false;
+        gp.cCheck.checkTile(this);
+
+        if (colisionOn == false) {
+
+            switch (directon) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+            }
+        }
+
+        spriteCounter++;
+        if (spriteCounter > 12) {
+            spriteNum = (spriteNum == 1) ? 2 : 1;
+            spriteCounter = 0;
+        }
+    }
     public void draw(Graphics g2d) {
 
         BufferedImage image = null;
