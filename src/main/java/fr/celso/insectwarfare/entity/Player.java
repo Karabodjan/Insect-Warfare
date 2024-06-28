@@ -39,8 +39,8 @@ public class Player extends Entity {
     public void setDefautValues(){
 
         //Set player defaut position
-        worldX= gp.tileSize * 39;
-        worldY = gp.tileSize * 39;
+        worldX= gp.tileSize * 24;
+        worldY = gp.tileSize * 33;
         speed = 4;
         directon = "down";
     }
@@ -84,7 +84,7 @@ public class Player extends Entity {
             gp.cCheck.checkTile(this);
 
             // CHECK OBJECT COLISION
-           int objIndex = gp.cCheck.checkObject(this, true);
+            int objIndex = gp.cCheck.checkObject(this, true);
             pickUpObject(objIndex);
 
             // CHECK NPC COLLISION
