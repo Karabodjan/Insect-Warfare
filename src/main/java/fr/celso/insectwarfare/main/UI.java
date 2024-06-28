@@ -3,8 +3,10 @@ package fr.celso.insectwarfare.main;
 
 import fr.celso.insectwarfare.object.OBJ_Key;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class UI {
 
@@ -12,10 +14,12 @@ public class UI {
     Graphics2D g2d;
     Font arial_40;
     BufferedImage keyImage;
+    BufferedImage titleImage;
     public boolean messageON = false;
     public String message = "";
     int messageCounter = 0;
     public String currentDialogue = "";
+    public int commandNum = 0;
 
 
     public UI(Panel gp) {
@@ -24,6 +28,35 @@ public class UI {
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         OBJ_Key key = new OBJ_Key();
         keyImage = key.image;
+
+        // Carrega a imagem da tela de título
+        try {
+            BufferedImage originalTitleImage = ImageIO.read(getClass().getResourceAsStream("/tilte/title_screem.jpg"));
+            titleImage = resizeImage(originalTitleImage, gp.screenWidth, gp.screenHeight); // Redimensiona a imagem para caber na tela
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para redimensionar a imagem
+    public BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) {
+        // Calcula a nova altura mantendo a proporção original da imagem
+        int originalWidth = originalImage.getWidth();
+        int originalHeight = originalImage.getHeight();
+        int newHeight = (originalHeight * targetWidth) / originalWidth;
+
+        // Se a nova altura for maior que o targetHeight, ajuste a largura para caber na altura
+        if (newHeight > targetHeight) {
+            targetWidth = (originalWidth * targetHeight) / originalHeight;
+            newHeight = targetHeight;
+        }
+
+        Image resultingImage = originalImage.getScaledInstance(targetWidth, newHeight, Image.SCALE_SMOOTH);
+        BufferedImage outputImage = new BufferedImage(targetWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = outputImage.createGraphics();
+        g2d.drawImage(resultingImage, 0, 0, null);
+        g2d.dispose();
+        return outputImage;
     }
 
     public void showMessage(String text) {
@@ -51,6 +84,11 @@ public class UI {
                 messageON = false;
             }
         }
+
+        //  Title STATE
+        if(gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
         // PLAY STATE
         if (gp.gameState == gp.playState) {
 
@@ -64,6 +102,45 @@ public class UI {
         if (gp.gameState == gp.dialogueState) {
             drawDialogueScreen();
         }
+    }
+
+    public void drawTitleScreen() {
+        // Desenha a imagem da tela de título
+        int x = (gp.screenWidth - titleImage.getWidth()) / 2;
+        int y = (gp.screenHeight - titleImage.getHeight()) / 2;
+        g2d.drawImage(titleImage, x, y, null);
+
+        // Menu
+        g2d.setFont(g2d.getFont().deriveFont(Font.BOLD,52F));
+        g2d.setColor(Color.black);
+
+        String text = "NEW GAME" ;
+        x = getXforCenteredText(text);
+        y += gp.tileSize*9;
+        g2d.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2d.drawString(">", x-gp.tileSize, y);
+        }
+
+         text = "LOAD GAME" ;
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2d.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2d.drawString(">", x-gp.tileSize, y);
+        }
+
+        text = "QUIT" ;
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2d.drawString(text, x, y);
+        if (commandNum == 2) {
+            g2d.drawString(">", x-gp.tileSize, y);
+        }
+
+
+
+
     }
     public void drawPauseScreen() {
 

@@ -45,10 +45,10 @@ public class Panel extends JPanel implements Runnable {
 
     //GAME STATE
     public int gameState;
+    public final int  titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
-    public final int  titleState = 0;
 
     public Panel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -64,8 +64,8 @@ public class Panel extends JPanel implements Runnable {
         aSetter.setObject(); // This method is to add other setup
         aSetter.setNPC();
 
-        playMusic(0);
-        gameState = playState;
+        //playMusic(0);
+        gameState = titleState;
     }
 
     public void startGameThread() {
@@ -129,35 +129,33 @@ public class Panel extends JPanel implements Runnable {
 
         //Title Screen
         if (gameState == titleState) {
-
+            ui.draw(g2d);
         }
         //Others
+        else {
+            //Tile
+            tileM.draw(g2d);//tem que estar em cima desenhamos o terreno depois o jogapdr
 
-
-
-        //Tile
-        tileM.draw(g2d);//tem que estar em cima desenhamos o terreno depois o jogapdr
-
-        //Object
-        for (int i = 0; i < obj.length; i++) {
-            if (obj[i] != null) {
-                obj [i].draw(g2d,this);
+            //Object
+            for (int i = 0; i < obj.length; i++) {
+                if (obj[i] != null) {
+                    obj [i].draw(g2d,this);
+                }
             }
-        }
 
-        //NPC
-        for (int i = 0; i < npc.length; i++) {
-            if (npc[i] != null) {
-                npc[i].draw(g2d);
+            //NPC
+            for (int i = 0; i < npc.length; i++) {
+                if (npc[i] != null) {
+                    npc[i].draw(g2d);
+                }
             }
+
+            //Player
+            player.draw(g2d);
+
+            //UI
+            ui.draw(g2d);
         }
-
-        //Player
-        player.draw(g2d);
-
-        //UI
-        ui.draw(g2d);
-
 
         g2d.dispose(); // boa prática para salvar memória
     }
