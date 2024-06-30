@@ -2,6 +2,12 @@ package fr.celso.insectwarfare.main;
 
 import fr.celso.insectwarfare.entity.Entity;
 
+
+/**
+ * The ColisionCheck class provides methods to check collisions between various entities (like player, NPCs, objects)
+ * and game elements (tiles, objects).
+ */
+
 public class ColisionCheck {
     Panel gp;
 
@@ -9,6 +15,7 @@ public class ColisionCheck {
         this.gp = gp;
     }
 
+    // Method to check collision with tiles
     public void checkTile(Entity entity) {
 
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;
@@ -57,9 +64,9 @@ public class ColisionCheck {
                 }
                 break;
         }
-
     }
 
+    // Method to check collision with objects
     public int checkObject(Entity entity, boolean player) {
 
         int index = 999;
@@ -97,7 +104,6 @@ public class ColisionCheck {
                             if (player == true) {
                                 index = i;
                             }
-
                         }
                         break;
                     case "right":
@@ -109,7 +115,6 @@ public class ColisionCheck {
                             if (player == true) {
                                 index = i;
                             }
-
                         }
                         break;
                     case "left":
@@ -129,10 +134,7 @@ public class ColisionCheck {
                 entity.solidArea.y = entity.solidAreaDefaultY;
                 gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
                 gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
-
-
             }
-
         }
         return index;
     }
@@ -189,16 +191,12 @@ public class ColisionCheck {
                 entity.solidArea.y = entity.solidAreaDefaultY;
                 target[i].solidArea.x = target[i].solidAreaDefaultX;
                 target[i].solidArea.y = target[i].solidAreaDefaultY;
-
-
             }
-
         }
-
         return index;
-
     }
 
+    // Method to check collision with the player entity
     public void checkPlayer (Entity entity) {
 
         // Get entity's solid area position
@@ -239,13 +237,12 @@ public class ColisionCheck {
                     break;
                 }
         }
+
+        // Reset positions of entity and player entity solid areas
         entity.solidArea.x = entity.solidAreaDefaultX;
         entity.solidArea.y = entity.solidAreaDefaultY;
         gp.player.solidArea.x =  gp.player.solidAreaDefaultX;
         gp.player.solidArea.y =  gp.player.solidAreaDefaultY;
 
-
     }
-
-
 }

@@ -3,7 +3,11 @@ package fr.celso.insectwarfare.main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class KeyBoard implements KeyListener { // KeyListener é a interface para receber informações do teclado
+/**
+ *  This class handles keyboard input for different game states.
+ */
+
+public class KeyBoard implements KeyListener {
 
     Panel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed,  enterPressed;
@@ -14,16 +18,17 @@ public class KeyBoard implements KeyListener { // KeyListener é a interface par
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // Não utilizado, mas necessário implementar
+        // Not used, but must be implemented due to KeyListener interface
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode(); // Pega os códigos das teclas
+        int code = e.getKeyCode(); // Get the code of the pressed key
 
 
         //TITLE STATE
         if (gp.gameState == gp.titleState){
+            // Navigation through menu options using 'Z' and 'S' keys
             if (code == KeyEvent.VK_Z) {
                 gp.ui.commandNum--;
                 if (gp.ui.commandNum < 0){
@@ -48,7 +53,6 @@ public class KeyBoard implements KeyListener { // KeyListener é a interface par
                     System.exit(0);
                 }
             }
-
         }
 
         //PLay state
@@ -73,26 +77,44 @@ public class KeyBoard implements KeyListener { // KeyListener é a interface par
                 enterPressed = true;
 
             }
-
         }
+
         //PAUSE STATE
        else if(gp.gameState == gp.pauseState){
             if (code == KeyEvent.VK_P) {
                 gp.gameState = gp.playState;
 
             }
-
         }
-
 
         //DIALOGUE STATE
         else if(gp.gameState == gp.dialogueState){
             if (code == KeyEvent.VK_ENTER) {
-                gp.gameState = gp.playState;
+                gp.gameState = gp.playState; // Return to gameplay after dialogue
             }
-
         }
 
+        // COMBAT STATE
+        else if (gp.gameState == gp.combatState) {
+            if (code == KeyEvent.VK_Q) {
+                gp.ui.leftPressed = true;
+                gp.ui.combatChoice--;
+                if (gp.ui.combatChoice < 0) {
+                    gp.ui.combatChoice = 2;
+                }
+            }
+            if (code == KeyEvent.VK_D) {
+                gp.ui.rightPressed = true;
+                gp.ui.combatChoice++;
+                if (gp.ui.combatChoice > 2) {
+                    gp.ui.combatChoice = 0;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                gp.ui.enterPressed = true;
+                gp.handleCombatInput(gp.ui.combatChoice);
+            }
+        }
 
     }
 

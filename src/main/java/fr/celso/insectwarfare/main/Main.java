@@ -1,6 +1,6 @@
 package fr.celso.insectwarfare.main;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +18,7 @@ public class Main {
         window.setVisible(true);
 
         panel.setupGame(); // called antes de iniciar o jogo
-        panel.startGameThread(); // Iniciar o loop do jog
+        panel.startGameThread();
     }
+
 }

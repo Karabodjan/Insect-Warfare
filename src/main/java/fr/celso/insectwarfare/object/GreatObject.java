@@ -1,9 +1,13 @@
 package fr.celso.insectwarfare.object;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-//Parent class fot all object class
+/**
+ * Parent class for all object classes in the game
+ */
+
 public class GreatObject {
 
     public BufferedImage image;
@@ -16,9 +20,11 @@ public class GreatObject {
 
     public void draw(Graphics g2d,fr.celso.insectwarfare.main.Panel gp) {
 
+        // Calculate screen coordinates relative to the player's position
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
+        // Only draw the object if it is within the visible screen area
         if (worldX + gp.tileSize> gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                 worldY + gp.tileSize> gp.player.worldY - gp.player.screenY &&
@@ -28,4 +34,4 @@ public class GreatObject {
 
         }
     }
-    }
+}

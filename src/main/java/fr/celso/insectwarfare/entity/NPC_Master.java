@@ -39,10 +39,7 @@ public class NPC_Master extends Entity {
 
         dialogues[0] = "Hello, Boy!";
         dialogues[1] = "The day has finally come...";
-        dialogues[2] = "You must defeat the evil that /nhas haunted this island for decades";
-        dialogues[3] = "Yes, your brother!";
-        dialogues[4] = "Find the key and enter the castle /nfor the final showdown";
-        dialogues[5] = "Good luck, Boy!";
+        dialogues[2] = "Good luck!";
     }
     public void setAction() {
 
@@ -76,4 +73,5 @@ public class NPC_Master extends Entity {
         super.speak();
     }
 }
+
 

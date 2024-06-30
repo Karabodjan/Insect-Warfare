@@ -1,6 +1,7 @@
 package fr.celso.insectwarfare.entity;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import fr.celso.insectwarfare.main.Panel;
 
@@ -33,7 +34,7 @@ public class Entity {
     public void speak(){
 
         if(dialogues[dialogueIndex] == null){
-            dialogueIndex = 4;
+            dialogueIndex = 0;
         }
         gp.ui.currentDialogue = dialogues[dialogueIndex];
         dialogueIndex++;

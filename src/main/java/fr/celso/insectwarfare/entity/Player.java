@@ -4,7 +4,8 @@ import fr.celso.insectwarfare.main.KeyBoard;
 import fr.celso.insectwarfare.main.Panel;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -39,8 +40,8 @@ public class Player extends Entity {
     public void setDefautValues(){
 
         //Set player defaut position
-        worldX= gp.tileSize * 24;
-        worldY = gp.tileSize * 33;
+        worldX= gp.tileSize * 39;
+        worldY = gp.tileSize * 39;
         speed = 4;
         directon = "down";
     }
@@ -76,7 +77,6 @@ public class Player extends Entity {
 
             } else if (keyB.rightPressed) {
                 directon = "right";
-
             }
 
             // CHECK TILE COLISION
@@ -110,7 +110,6 @@ public class Player extends Entity {
                         break;
                 }
             }
-
             spriteCounter++;
             if (spriteCounter > 12) {
                 spriteNum = (spriteNum == 1) ? 2 : 1;
@@ -142,11 +141,8 @@ public class Player extends Entity {
                         gp.ui.showMessage("Go find the key!");
                     }
                     break;
-
             }
-
         }
-
     }
 
     public void interactNPC(int i) {
@@ -179,5 +175,4 @@ public class Player extends Entity {
         }
         g2d.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
-
 }

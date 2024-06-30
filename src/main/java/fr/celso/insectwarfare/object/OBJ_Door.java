@@ -3,12 +3,18 @@ package fr.celso.insectwarfare.object;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
+/**
+ * Represents a door object in the game.
+ * Extends GreatObject to inherit common properties and methods.
+ */
+
 public class OBJ_Door  extends GreatObject{
 
     public OBJ_Door(){
 
         name = "Door";
-        // To load the image
+
+        // Load the image of the door
         try {
             image = ImageIO.read(getClass().getResource("/objects/door_iron.png"));
 

@@ -9,11 +9,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Manages tiles for the game map, including loading tile images and drawing them.
+ */
+
 public class TileManager {
 
     Panel gp;
     public Tile[] tile;
-    public int mapTileNum[] [] [];
+    public int mapTileNum[] [] []; // Map representation with tile numbers
 
     public TileManager(Panel gp) {
 
@@ -23,6 +27,8 @@ public class TileManager {
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
+
+        // Load maps from text files
         loadMap("/maps/world01.txt",0);
         loadMap("/maps/map00.txt",1);
     }
@@ -30,7 +36,7 @@ public class TileManager {
     public void getTileImage() {
 
         try {
-
+            // Load different tile images
             tile[0]= new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
 
@@ -103,21 +109,21 @@ public class TileManager {
 
 
         while (worlCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
+            int tileNum = mapTileNum [gp.currentMap][worlCol] [worldRow]; // Get tile number from map
 
-            int tileNum = mapTileNum [gp.currentMap][worlCol] [worldRow];
-
+            // Calculate screen positions
             int worldX = worlCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
+            // Draw tile if within the visible area
             if (worldX + gp.tileSize> gp.player.worldX - gp.player.screenX &&
                     worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                     worldY + gp.tileSize> gp.player.worldY - gp.player.screenY &&
                     worldY - gp.tileSize< gp.player.worldY + gp.player.screenY) {
 
                 g2d.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-
             }
             worlCol++;
 
